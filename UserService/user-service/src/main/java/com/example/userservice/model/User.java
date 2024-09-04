@@ -1,11 +1,6 @@
 package com.example.userservice.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.Column;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "users")
@@ -24,17 +19,29 @@ public class User {
     @Column(nullable = false)
     private String email;
 
-    // Constructors, Getters, and Setters
+    @Column(name = "profile_picture")
+    private String profilePicture;
 
-    public User() {
+    @Enumerated(EnumType.STRING)
+    private UserStatus status = UserStatus.OFFLINE; // Default status is offline
+
+    public enum UserStatus {
+        ONLINE,
+        OFFLINE,
+        AWAY
     }
+
+    // Constructors, Getters, and Setters
+    public User() {}
 
     public User(String username, String password, String email) {
         this.username = username;
         this.password = password;
         this.email = email;
+        // this.status = UserStatus.OFFLINE; // Default status
     }
 
+    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -65,5 +72,21 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
+    }
+
+    public UserStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(UserStatus status) {
+        this.status = status;
     }
 }
