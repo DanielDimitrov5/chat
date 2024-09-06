@@ -19,6 +19,7 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody User user) {
+
         User savedUser = userService.saveUser(user);
         return ResponseEntity.ok(savedUser);
     }
@@ -72,5 +73,4 @@ public class UserController {
         Optional<User> findByUsername(String username);
         List<User> findByUsernameContaining(String username);
     }
-
 }
