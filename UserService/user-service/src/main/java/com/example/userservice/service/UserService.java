@@ -38,11 +38,6 @@ public class UserService {
     public String loginUser(String username, String password) {
         Optional<User> user = userRepository.findByUsername(username);
 
-        System.out.println(username);
-
-//        System.out.println(password);
-//        System.out.println(user.get().getPassword());
-
         if (user.isPresent() && passwordEncoder.matches(password, user.get().getPassword())) {
             return jwtUtil.generateToken(username); // Return JWT token
         }
